@@ -3,11 +3,13 @@
         <div class="relative flex items-start" v-for="(standard, index) in standards" :key="index">
             <div class="flex h-6 items-center">
                 <input
-                    :id="index"
+                    :id="standard.code"
+                    :value="standard.code"
                     name="comments"
                     type="checkbox"
                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                     @change="addStandard(standard)"
+                    v-model="checkedStandards"
                 />
             </div>
             <div class="ml-3 text-sm leading-6">
@@ -19,8 +21,23 @@
 </template>
 
 <script>
+    import {mapState} from "vuex";
+
     export default {
         props: ['standards'],
+        computed: {
+            ...mapState({
+                selectedStandards: state => state.standards.items
+            }),
+            checkedStandards: {
+                get: function () {
+                    return this.selectedStandards.map(standard => standard.code)
+                },
+                set: function (newValue) {
+                    //pass
+                }
+            },
+        },
         methods: {
             async addStandard (NewStandard) {
                 const standard = await this.$store.dispatch('standards/getItemFromStandards', NewStandard)
