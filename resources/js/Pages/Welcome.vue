@@ -160,7 +160,9 @@
             removeStandard (standard) {
                 this.$store.dispatch('standards/removeItemFromStandards', standard)
             },
-            clearAllStandards () {},
+            clearAllStandards () {
+                this.$store.dispatch('standards/clearItemsFromStandards')
+            },
         },
         created() {
             this.standards = standards;
