@@ -96,7 +96,7 @@
                                     </div>
                                     <div>
                                         <a
-                                            @click.prevent="removeStandard"
+                                            @click.prevent="removeStandard(standard)"
                                             href="#"
                                             class="inline-flex items-center rounded-full bg-white px-3 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-red-200 hover:bg-red-100 hover:text-red-500"
                                         >
@@ -139,7 +139,7 @@
     import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/vue/24/outline'
     import standards from '../standards.js'
     import Grades from '@/Components/Grades.vue';
-    import { mapState } from 'vuex'
+    import {mapState} from 'vuex'
 
     export default {
         components: {
@@ -157,8 +157,9 @@
             }),
         },
         methods: {
-            // Implement these methods:
-            removeStandard () {},
+            removeStandard (standard) {
+                this.$store.dispatch('standards/removeItemFromStandards', standard)
+            },
             clearAllStandards () {},
         },
         created() {
