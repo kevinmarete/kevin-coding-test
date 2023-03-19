@@ -25,7 +25,7 @@ const mutations = {
         state.items.push(standard)
     },
     removeItemFromStandards(state, { standard }){
-        state.items = state.items.filter(item => item["key"] !== standard["key"])
+        state.items = state.items.filter(item => item["code"] !== standard["code"])
     }
 }
 
