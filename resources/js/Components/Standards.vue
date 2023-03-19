@@ -22,8 +22,14 @@
     export default {
         props: ['standards'],
         methods: {
-            addStandard (standard) {
-                this.$store.dispatch('standards/addItemToStandards', standard)
+            async addStandard (NewStandard) {
+                const standard = await this.$store.dispatch('standards/getItemFromStandards', NewStandard)
+                if(standard){
+                    this.$store.dispatch('standards/removeItemFromStandards', NewStandard)
+                }
+                if(!standard){
+                    this.$store.dispatch('standards/addItemToStandards', NewStandard)
+                }
             }
         }
     }
