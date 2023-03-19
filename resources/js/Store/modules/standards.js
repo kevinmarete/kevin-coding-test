@@ -14,6 +14,9 @@ const actions = {
   addItemToStandards ({ state, commit }, standard) {
         commit('addItemToStandards', { standard })
   },
+  getItemFromStandards({ state, getters}, standard){
+      return getters.cartProducts.find(item => item["code"] === standard["code"])
+  },
   removeItemFromStandards({ state, commit }, standard) {
       commit('removeItemFromStandards', { standard })
   },
